@@ -22,20 +22,11 @@ def simple_var_model(train_x, train_y, test_x, test_y, n, seq_len, num_hidden=2)
         sess.run(init_op)
         num_batches = len(train_x)/batch_size
         epochs = 5000
-        print(sess.run(sqerr, {data: train_x[0:batch_size], target: train_y[:batch_size]}))
         for i in range(epochs):
             for j in range(num_batches):
                 train_input, train_output = train_x[j*batch_size:(j+1)*batch_size], train_y[j*batch_size:(j+1)*batch_size]
                 sess.run(minimize, {data: train_input, target: train_output})
-        print(sess.run(sqerr, {data: train_input, target: train_output}))
-        """test_data = tf.placeholder(tf.float32, [1, seq_len, n])
-        test_target = tf.placeholder(tf.float32, [1, n])
-        test_cell = tf.contrib.rnn.BasicRNNCell(num_hidden)
-        test_val, _ = tf.nn.dynamic_rnn(test_cell, test_data, dtype=tf.float32)
-        test_val = tf.transpose(test_val, [1, 0, 2])
-        last = tf.gather(test_val, int(test_val.get_shape()[0])-1)
-        test_pred = tf.matmul(last, weight)+bias"""
         test_prediction = sess.run(prediction, {data: test_x, target: test_y})
         test_err = np.sqrt(np.sum((np.array(test_prediction)-np.array(test_y))**2)/len(test_prediction))/np.sqrt(np.sum(np.mean(test_y, axis=0)**2))
         sess.close()
-        return test_err, test_prediction
+        return test_err

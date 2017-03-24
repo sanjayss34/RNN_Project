@@ -11,12 +11,11 @@ n_vals = range(2, 11)
 errs = []
 for n in n_vals:
     errs.append(simple_var_model(train_x, train_y, test_x, test_y, dim, seq_len, num_hidden=n))
-    print(errs)
     print(str(n) + ' done')
 plt.plot(n_vals, errs, 'bo')
 plt.xlabel('Number of hidden cells')
 plt.ylabel('RMSE (Test)')
 plt.title('RNN for Simple VAR: Test Error vs. Number of hidden cells')
 plt.xlim(1, 11)
-plt.ylim(0, np.sqrt(dim))
+plt.ylim(0, 1)
 plt.show()

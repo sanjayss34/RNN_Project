@@ -22,7 +22,7 @@ def simple_var(n, T, sequence_len=10):
         i += add
     test_x = [x[j:j+sequence_len] for j in range(i, T, sequence_len)]
     test_y = y[i+sequence_len-1::sequence_len]
-    return train_x, train_y, test_x, test_y, y, alpha
+    return train_x, train_y, test_x, test_y, alpha
 
 def linear_var(n, T, sequence_len=10):
     y = np.zeros((T, n))
