@@ -5,6 +5,7 @@ def simple_var(n, T, sequence_len=10):
     x = np.random.rand(T, n)
     alpha = np.random.rand()
     num_seq = T/sequence_len
+    # y_0 = 0
     y_0 = np.random.rand(1, n)
     for s in range(num_seq):
         start = s*sequence_len
@@ -30,7 +31,7 @@ def linear_var(n, T, sequence_len=10):
     A = np.random.rand(n, n)
     B = np.random.rand(n, n)
     num_seq = T/sequence_len
-    y_0 = np.random.rand(1, n)
+    y_0 = 0
     for s in range(num_seq):
         start = s*sequence_len
         y[start] = y_0
